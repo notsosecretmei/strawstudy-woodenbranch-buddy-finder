@@ -2,60 +2,71 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard</title>
-  <!-- Link CSS -->
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <title>Dashboard - Study Buddy Finder</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+  <div class="container">
 
-  <!-- Notification bar -->
-  <div id="notification"></div>
+    <!-- Greeting -->
+    <h1>Welcome, {{ user.name }}</h1>
+    <a class="logout" href="{{ url_for('logout') }}">Logout</a>
 
-  <h1>Welcome, {{ user.name }}!</h1>
+    <!-- Search Feature -->
+    <h2>Search for a Study Buddy</h2>
+    <form method="POST" action="{{ url_for('dashboard') }}">
+      <input type="text" name="search" placeholder="Enter username">
+      <button type="submit">Search</button>
+    </form>
 
-  <h2>Send Study Buddy Request</h2>
-  <ul>
-    {% for u in users %}
-      <li>
-        {{ u.name }}
-        <a href="{{ url_for('send_request', receiver_id=u.id) }}">
-          <button onclick="showNotification('Request sent to {{ u.name }}!')">Send Request</button>
-        </a>
-      </li>
-    {% endfor %}
-  </ul>
+    <!-- Search Results -->
+    {% if search_results %}
+      <h3>Search Results:</h3>
+      <ul>
+        {% for u in search_results %}
+          <li>
+            {{ u.name }} 
+            <a href="{{ url_for('send_request', receiver_id=u.id) }}">Send Request</a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
 
-  <h2>Incoming Requests</h2>
-  <ul>
-    {% for req in incoming_requests %}
-      <li>
-        {{ req.sender.name }}
-        <a href="{{ url_for('accept_request', request_id=req.id) }}">
-          <button onclick="showNotification('You accepted {{ req.sender.name }}!')">Accept</button>
-        </a>
-      </li>
+    <!-- Random Buddy Button -->
+    <h2>Or Find a Random Buddy</h2>
+    <a class="random-btn" href="{{ url_for('find_random') }}">Find Random Buddy</a>
+
+    <!-- Incoming Requests -->
+    <h2>Incoming Requests</h2>
+    {% if incoming_requests %}
+      <ul>
+        {% for r in incoming_requests %}
+          <li>
+            {{ r.sender_id }} sent you a request
+            <a href="{{ url_for('accept_request', request_id=r.id) }}">Accept</a>
+          </li>
+        {% endfor %}
+      </ul>
     {% else %}
-      <li>No incoming requests</li>
-    {% endfor %}
-  </ul>
+      <p>No incoming requests yet.</p>
+    {% endif %}
 
-  <h2>Your Study Buddies</h2>
-  <ul>
-    {% for buddy in accepted_users %}
-      <li>
-        {{ buddy.name }}<br>
-        Instagram: {{ buddy.instagram }}<br>
-        Discord: {{ buddy.discord }}
-      </li>
+    <!-- Accepted Study Buddies -->
+    <h2>Accepted Study Buddies</h2>
+    {% if accepted_users %}
+      <ul>
+        {% for buddy in accepted_users %}
+          <li>
+            {{ buddy.name }} <br>
+            Instagram: {{ buddy.instagram }} <br>
+            Discord: {{ buddy.discord }}
+          </li>
+        {% endfor %}
+      </ul>
     {% else %}
-      <li>You have no accepted study buddies yet</li>
-    {% endfor %}
-  </ul>
+      <p>You don't have any accepted buddies yet.</p>
+    {% endif %}
 
-  <a href="/logout"><button>Logout</button></a>
-
-  <!-- Link JS -->
-  <script src="{{ url_for('static', filename='js/notifications.js') }}"></script>
+  </div>
 </body>
 </html>

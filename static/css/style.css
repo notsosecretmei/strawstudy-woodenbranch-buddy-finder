@@ -1,120 +1,124 @@
-/* -----------------------
-   GENERAL BODY
------------------------- */
+/* --------------------------
+   GLOBAL STYLES
+--------------------------- */
 body {
-  font-family: 'Georgia', 'Times New Roman', serif;
-  background-color: #fdfaf4; /* cream paper-like background */
-  color: #2c2c2c; /* dark readable text */
+  font-family: "Georgia", "Times New Roman", serif; /* Elegant serif font */
+  background-color: #121212; /* Very dark background */
+  color: #f5f0e6; /* Soft beige text */
   margin: 0;
   padding: 0;
   line-height: 1.6;
 }
 
-/* -----------------------
-   HEADERS
------------------------- */
-h1, h2 {
-  font-family: 'Georgia', serif;
-  color: #3b2f2f; /* dark brown */
-  text-align: center;
-  margin: 20px 0;
-  letter-spacing: 1px;
+.container {
+  max-width: 800px;
+  margin: 40px auto;
+  background: #1e1e1e; /* Dark container */
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0px 0px 15px rgba(0,0,0,0.7);
 }
 
-/* -----------------------
-   LINKS
------------------------- */
-a {
-  color: #3b2f2f;
+/* --------------------------
+   HEADINGS
+--------------------------- */
+h1, h2, h3 {
+  font-family: "Times New Roman", serif;
+  color: #d4af37; /* Gold color */
+  margin-bottom: 15px;
+}
+
+/* --------------------------
+   LINKS & BUTTONS
+--------------------------- */
+a, button {
+  background: #2a2a2a;
+  color: #f5f0e6;
+  padding: 8px 15px;
   text-decoration: none;
-  font-weight: bold;
-  border-bottom: 1px solid #3b2f2f;
-  padding-bottom: 2px;
-}
-a:hover {
-  color: #a0522d; /* softer brown on hover */
-}
-
-/* -----------------------
-   FORM CONTAINER
------------------------- */
-form {
-  max-width: 500px;
-  margin: 20px auto;
-  background-color: #fffdf8; /* lighter cream card */
-  padding: 20px;
-  border: 1px solid #d3c4a6; /* subtle border */
   border-radius: 6px;
-  box-shadow: 2px 2px 6px rgba(0,0,0,0.05);
-}
-
-/* -----------------------
-   FORM INPUTS
------------------------- */
-input, select {
-  width: 95%;
-  padding: 8px;
-  margin: 8px 0;
-  border-radius: 4px;
-  border: 1px solid #c4b18a;
-  background-color: #fefdf9;
-  font-size: 1rem;
-}
-
-/* -----------------------
-   BUTTONS
------------------------- */
-button {
-  background-color: #3b2f2f; /* dark brown */
-  color: #fdfaf4; /* cream text */
-  padding: 8px 12px;
-  border: none;
-  border-radius: 4px;
+  border: 1px solid #444;
   cursor: pointer;
+  font-size: 14px;
+  transition: 0.3s ease;
+}
+
+a:hover, button:hover {
+  background: #d4af37;
+  color: #121212;
+}
+
+/* Special buttons */
+.random-btn {
+  display: inline-block;
+  margin-top: 15px;
   font-weight: bold;
 }
-button:hover {
-  background-color: #5a423b;
+
+/* --------------------------
+   FORMS
+--------------------------- */
+form {
+  margin: 15px 0;
 }
 
-/* -----------------------
-   LISTS (for dashboard)
------------------------- */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 6px;
+  border: 1px solid #444;
+  background: #111;
+  color: #f5f0e6;
+  font-size: 14px;
+}
+
+button[type="submit"] {
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* --------------------------
+   LISTS
+--------------------------- */
 ul {
   list-style: none;
   padding: 0;
-  max-width: 600px;
-  margin: 20px auto;
-}
-li {
-  background-color: #fffdf8;
-  border: 1px solid #d3c4a6;
-  margin-bottom: 10px;
-  padding: 12px;
-  border-radius: 4px;
 }
 
-/* -----------------------
-   NOTIFICATION BAR
------------------------- */
-#notification {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  text-align: center;
+ul li {
+  background: #2a2a2a;
+  margin: 8px 0;
   padding: 10px;
-  background-color: #d3c4a6; /* parchment border color */
-  color: #2c2c2c;
-  display: none;
-  z-index: 9999;
-  font-weight: bold;
+  border-radius: 6px;
 }
 
-/* -----------------------
-   RESPONSIVE
------------------------- */
-@media (max-width: 600px) {
-  form, ul {
-    width: 90%;
-  }
+/* --------------------------
+   FLASH MESSAGES (alerts)
+--------------------------- */
+.flash {
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 15px;
+}
+
+.flash.success {
+  background: #2d6a4f;
+  color: #d4f5dc;
+}
+
+.flash.danger {
+  background: #a4161a;
+  color: #ffe6e6;
+}
+
+.flash.info {
+  background: #1d3557;
+  color: #dceefb;
+}
+.flash.warning {
+  background: #f4a261;
+  color: #3d2c00;
 }

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Random Buddy - Study Buddy Finder</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>We Found a Random Buddy for You!</h1>
+
+    <p><strong>Username:</strong> {{ random_user.name }}</p>
+    <a href="{{ url_for('send_request', receiver_id=random_user.id) }}">Send Request</a>
+
+    <br><br>
+    <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+  </div>
+</body>
+</html>
