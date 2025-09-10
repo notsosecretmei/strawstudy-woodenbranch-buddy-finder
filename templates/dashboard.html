@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  <!-- Link CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+  <!-- Notification bar -->
+  <div id="notification"></div>
+
+  <h1>Welcome, {{ user.name }}!</h1>
+
+  <h2>Send Study Buddy Request</h2>
+  <ul>
+    {% for u in users %}
+      <li>
+        {{ u.name }}
+        <a href="{{ url_for('send_request', receiver_id=u.id) }}">
+          <button onclick="showNotification('Request sent to {{ u.name }}!')">Send Request</button>
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <h2>Incoming Requests</h2>
+  <ul>
+    {% for req in incoming_requests %}
+      <li>
+        {{ req.sender.name }}
+        <a href="{{ url_for('accept_request', request_id=req.id) }}">
+          <button onclick="showNotification('You accepted {{ req.sender.name }}!')">Accept</button>
+        </a>
+      </li>
+    {% else %}
+      <li>No incoming requests</li>
+    {% endfor %}
+  </ul>
+
+  <h2>Your Study Buddies</h2>
+  <ul>
+    {% for buddy in accepted_users %}
+      <li>
+        {{ buddy.name }}<br>
+        Instagram: {{ buddy.instagram }}<br>
+        Discord: {{ buddy.discord }}
+      </li>
+    {% else %}
+      <li>You have no accepted study buddies yet</li>
+    {% endfor %}
+  </ul>
+
+  <a href="/logout"><button>Logout</button></a>
+
+  <!-- Link JS -->
+  <script src="{{ url_for('static', filename='js/notifications.js') }}"></script>
+</body>
+</html>
